@@ -1,0 +1,25 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Список постів</title>
+    <link rel="stylesheet" href="{% static 'blog/style.css' %}">
+</head>
+
+<body>
+    <div class="content">
+        <h2>Список постів</h2>
+        <ul>
+            {% for post in posts %}
+            <li>
+                <a href="{% url 'post_detail' post.id %}">{{ post.title }}</a> — {{ post.published_date }} ({{ post.author.name }})
+            </li>
+            {% empty %}
+            <li>Немає постів.</li>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+
+</html>
