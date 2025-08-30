@@ -3,29 +3,21 @@
 <html>
 
 <head>
-    <title>Список постів</title>
-    <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+    <title>Пости автора {{ author.name }}</title>
+    <link rel="stylesheet" href="{% static 'blog/style.css' %}">
 </head>
 
 <body>
     <div class="content">
-        <h2>Мої пости</h2>
-        <table>
-            <tr>
-                <th>Заголовок</th>
-                <th>Дата публікації</th>
-            </tr>
+        <h2>Пости автора: {{ author.name }}</h2>
+        <p>{{ author.bio }}</p>
+        <ul>
             {% for post in posts %}
-            <tr>
-                <td>{{ post.title }}</td>
-                <td>{{ post.published_date }}</td>
-            </tr>
+            <li><a href="{% url 'post_detail' post.id %}">{{ post.title }}</a> — {{ post.published_date }}</li>
             {% empty %}
-            <tr>
-                <td colspan="2">Немає постів.</td>
-            </tr>
+            <li>Автор ще не має постів.</li>
             {% endfor %}
-        </table>
+        </ul>
     </div>
 </body>
 

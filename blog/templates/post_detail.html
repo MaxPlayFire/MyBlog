@@ -1,0 +1,28 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>{{ post.title }}</title>
+    <link rel="stylesheet" href="{% static 'blog/style.css' %}">
+</head>
+
+<body>
+    <div class="content">
+        <h2>{{ post.title }}</h2>
+        <p><em>Автор: <a href="{% url 'posts_by_author' post.author.id %}">{{ post.author.name }}</a></em></p>
+        <p>{{ post.content }}</p>
+        <p><small>Опубліковано: {{ post.published_date }}</small></p>
+
+        <h3>Коментарі:</h3>
+        <ul>
+            {% for comment in post.comments.all %}
+            <li><strong>{{ comment.author_name }}:</strong> {{ comment.text }} ({{ comment.created_date }})</li>
+            {% empty %}
+            <li>Немає коментарів.</li>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+
+</html>
